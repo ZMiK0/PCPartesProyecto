@@ -1,3 +1,7 @@
+from products import Product
+from warehouse import Warehouse
+
+
 class Engine:
 
     def __init__(self):
@@ -24,6 +28,8 @@ class Engine:
                 case _:
                     print("Wrong option. Please repeat your option")
                     ok = True
+
+        
     
     
 

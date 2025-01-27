@@ -1,36 +1,70 @@
 from products import Product
 from warehouse import Warehouse
+import os
 
+def clear():
+        if os.name == 'nt':
+            os.system('cls')
+        else:
+            os.system('clear')
 
 class Engine:
 
     def __init__(self):
-        pass
+        self.warehouse = Warehouse()
+
+    
 
     def menu(self):
-        ok = True
-        while(ok):
-            print(" 1. Show inventory \n 2. Add product \n 3. Exit ")
-            option = input("")
+        ok = False
+        while not ok:
+            clear()
+            print("────────────────────────────────────")
+            print("1. Show inventory \n2. Add product \n0. Exit ")
+            print("────────────────────────────────────")
+            option = input("SELECT: ")
             match option:
                 case "1":
                     print("Inventory")
-                    ok = False
-                    break
+                    self.warehouse.show_products()
+                    input()
                 case "2":
                     print("Add product")
-                    ok = False
-                    break
-                case "3":
-                    print("Bye bye")
-                    ok = False
-                    break
+                    self.add_menu()
                 case _:
-                    print("Wrong option. Please repeat your option")
+                    print("Bye")
                     ok = True
 
-        
-    
-    
+
+    def add_menu(self):
+         ok2 = False
+         while not ok2:
+            clear()
+            print("────────────────────────────────────")
+            print("1. Cpu\n2. Gpu\n3. Motherboards\n4. Ram\n0. Exit")
+            print("────────────────────────────────────")
+            option2 = input("SELECT: ")
 
             
+            match option2:
+                case "1":
+                    category = "Cpu"
+                case "2":
+                    category = "Gpu"
+                case "3":
+                    category = "Motherboards"
+                case "4":
+                    category = "Ram"
+                case _:
+                    category = None
+                    ok2 = True
+                    break
+            name = input("Name: ")
+            brand = input("Brand: ")
+            stock = int(input("Stock: "))
+            price = float(input("Price: "))
+            print("────────────────────────────────────")
+            product = Product(name, brand, stock, price)
+            if category != None:
+                self.warehouse.add(category, product)
+                input()

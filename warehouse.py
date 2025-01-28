@@ -3,6 +3,18 @@ from products import Product
 
 class Warehouse:
 
+    '''
+    Warehouse's builder
+
+    Attributes:
+    - cpu0: its an object of the product's class. Category (Key): Cpu
+    - cpu1: its an object of the products's class. Category (Key): Cpu
+    - gpu0: its an object of the product's class. Category (Key): Gpu
+    - moth0: its an object of the product's class. Category (Key): Motherboards
+    - ram0: its an object of the product's class. Category (Key): Ram
+
+    - self.products: its a dictionary. The keys are the categories of the products and the values are the objects of the product's class
+    '''
     def __init__(self):
         cpu0 = Product("Ryzen 7 5600G", "AMD", 7, 140.32)
         cpu1 = Product("i7 12400H", "Intel", 8, 199.99)
@@ -19,7 +31,15 @@ class Warehouse:
         
         
     
+    '''
+    Add's method
 
+    This method add a product in the dictionary.
+
+    Paremeters:
+    - category (str): its the category of the product. This is the key of the dictionary
+    - product (Product): its the product object, contains all the information (name, brand, stock, price)
+    '''
     def add(self, category:str, product:Product):
         self.products[category].append(product)
         print("Product added")
@@ -28,7 +48,12 @@ class Warehouse:
 
     def remove(self):
         pass # A futuro
+    
+    '''
+    Show_products's method
 
+    This method shows you completetly the dictionary
+    '''
     def show_products(self):
         
         for i in self.products:

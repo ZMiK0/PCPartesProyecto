@@ -2,19 +2,39 @@ from products import Product
 from warehouse import Warehouse
 import os
 
+'''
+Clear's method 
+
+This method cleans all your console
+'''
 def clear():
         if os.name == 'nt':
             os.system('cls')
         else:
             os.system('clear')
 
+'''
+Engine's class
+
+This class contains the logic of the app
+'''
 class Engine:
 
+    '''
+    Engine's builder
+
+    Attribute:
+    - warehouse: it's an object of the Warehouse's class
+    '''
     def __init__(self):
         self.warehouse = Warehouse()
 
     
+    '''
+    Menu's method
 
+    This method show you the app menu. Option 1: Show the inventory. Option 2: Add a product into the inventory. Option 3: Exit the app
+    '''
     def menu(self):
         ok = False
         while not ok:
@@ -35,7 +55,11 @@ class Engine:
                     print("Bye")
                     ok = True
 
+    '''
+    Add_menu's method
 
+    This method show you the options when you add a product in the inventory
+    '''
     def add_menu(self):
          ok2 = False
          while not ok2:

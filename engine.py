@@ -40,7 +40,7 @@ class Engine:
         while not ok:
             clear()
             print("────────────────────────────────────")
-            print("1. Show inventory \n2. Add product \n0. Exit ")
+            print("1. Show inventory \n2. Add product \n3. Search product \n0. Exit ")
             print("────────────────────────────────────")
             option = input("SELECT: ")
             match option:
@@ -51,6 +51,11 @@ class Engine:
                 case "2":
                     print("Add product")
                     self.add_menu()
+                case "3":
+                    print("Search a product")
+                    category = input("Say the product category: ")
+                    name = input("Say the product name: ")
+                    self.warehouse.search_product(category, name)
                 case _:
                     print("Bye")
                     ok = True

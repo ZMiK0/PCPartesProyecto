@@ -63,3 +63,24 @@ class Warehouse:
             for j in self.products[i]:
                 print(j)
         print("─────────────────────────────────────────────────────────────────────────────────")
+    
+    '''
+    Search_product's method
+
+    This method search a product in own warehouse, with the user category and name
+    '''
+    def search_product(self, category:str, name:str):
+        for key in self.products.keys():
+            if (category.lower() == key.lower()):
+                print("Category's correct")
+                for product in self.products[key]:
+                    if(name.lower() == product.getName().lower()):
+                        print(f"The product has been located: {product}")
+                        input()
+                        break
+                    else:
+                        print("The product hasn't been located")
+                        input()
+                        break
+                
+                    

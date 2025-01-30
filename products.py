@@ -28,3 +28,6 @@ class Product:
     '''
     def __str__(self):
         return f"Name: {self.name}, Brand: {self.brand}, Stock: {self.stock}, Price: {self.price}€"
+    
+    def getName(self):
+        return self.name

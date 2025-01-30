@@ -3,7 +3,7 @@ from warehouse import Warehouse
 import os
 
 '''
-Clear's method 
+Clear method 
 
 This method cleans all your console
 '''
@@ -14,14 +14,14 @@ def clear():
             os.system('clear')
 
 '''
-Engine's class
+Engine class
 
 This class contains the logic of the app
 '''
 class Engine:
 
     '''
-    Engine's builder
+    Engine builder
 
     Attribute:
     - warehouse: it's an object of the Warehouse's class
@@ -31,7 +31,7 @@ class Engine:
 
     
     '''
-    Menu's method
+    Menu method
 
     This method show you the app menu. Option 1: Show the inventory. Option 2: Add a product into the inventory. Option 3: Exit the app
     '''
@@ -40,7 +40,7 @@ class Engine:
         while not ok:
             clear()
             print("────────────────────────────────────")
-            print("1. Show inventory \n2. Add product \n3. Search product \n0. Exit ")
+            print("1. Show inventory \n2. Add product \n3. Search product \n4. Update product \n0. Exit ")
             print("────────────────────────────────────")
             option = input("SELECT: ")
             match option:
@@ -53,20 +53,25 @@ class Engine:
                     self.add_menu()
                 case "3":
                     print("Search a product")
-                    category = input("Say the product category: ")
-                    name = input("Say the product name: ")
+                    category = input("Please, say the product category: ")
+                    name = input("Please, say the product name: ")
                     self.warehouse.search_product(category, name)
+                case "4":
+                    print("Update product")
+                    category = input("Please, say the product category: ")
+                    self.warehouse.update_product(category)
                 case _:
                     print("Bye")
                     ok = True
 
     '''
-    Add_menu's method
+    Add_menu method
 
     This method show you the options when you add a product in the inventory
     '''
     def add_menu(self):
          ok2 = False
+         ok3 = False
          while not ok2:
             clear()
             print("────────────────────────────────────")
@@ -88,10 +93,15 @@ class Engine:
                     category = None
                     ok2 = True
                     break
+            #Queda comprobar si hay elementos repes
             name = input("Name: ")
             brand = input("Brand: ")
-            stock = int(input("Stock: "))
-            price = float(input("Price: "))
+            while(not ok3):
+                stock = int(input("Stock: "))
+                price = float(input("Price: "))
+                if(stock > 0 and price > 0):
+                    print("The stock and the price aren't negative numbers. Please try again")
+                    ok3 = True
             print("────────────────────────────────────")
             product = Product(name, brand, stock, price)
             if category != None:

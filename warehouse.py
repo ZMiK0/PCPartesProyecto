@@ -4,7 +4,7 @@ from products import Product
 class Warehouse:
 
     '''
-    Warehouse's builder
+    Warehouse builder
 
     Attributes:
     - cpu0: its an object of the product's class. Category (Key): Cpu
@@ -32,7 +32,7 @@ class Warehouse:
         
     
     '''
-    Add's method
+    Add method
 
     This method add a product in the dictionary.
 
@@ -50,7 +50,7 @@ class Warehouse:
         pass # A futuro
     
     '''
-    Show_products's method
+    Show_products method
 
     This method shows you completetly the dictionary
     '''
@@ -65,13 +65,21 @@ class Warehouse:
         print("─────────────────────────────────────────────────────────────────────────────────")
     
     '''
-    Search_product's method
+    Search_product method
 
     This method search a product in own warehouse, with the user category and name
+
+    Parameters:
+    - category (str): its the product category, its useful to search easily the product
+    - name (str): its the product name, its useful to locate easily the product
     '''
     def search_product(self, category:str, name:str):
         for key in self.products.keys():
-            if (category.lower() == key.lower()):
+            if (category.lower() != key.lower()):
+                print("Category isn't correct")
+                input()
+                break
+            else:
                 print("Category's correct")
                 for product in self.products[key]:
                     if(name.lower() == product.getName().lower()):
@@ -82,5 +90,44 @@ class Warehouse:
                         print("The product hasn't been located")
                         input()
                         break
-                
-                    
+    
+    '''
+    Update_product method
+
+    This method update the stock or the price for a product in specific
+
+    Parameters:
+    - category (str): its the product category, its useful to search easily the product
+    '''
+    def update_product(self, category:str):
+        for key in self.products.keys():
+            if(category.lower() != key.lower()):
+                print("Category isn't correct")
+                input()
+                return
+            else:
+                print("Category's correct")
+                name = input("What product do you want to update?")
+                for product in self.products[key]:
+                    if(name.lower() != product.getName().lower()):
+                        print("The product hasn't been located")
+                        input()
+                        return
+                    else:
+                        print("Do you want to update the stock (1) or the price (2)")
+                        option = input("SELECT: ")
+                        match option:
+                            case "1":
+                                stock = int(input("What's the new stock?: "))
+                                product.setStock(stock)
+                                print(f"The stock has been updated. Stock: {product.getStock()}")
+                                input()
+                                return 
+                            case "2":
+                                price = float(input("What's the new price?: "))
+                                product.setPrice(price)
+                                print(f"The price has been updated. Price: {product.getPrice()}€")
+                                input()
+                                return 
+                            case _:
+                                print("This option isn't correct, please try again")

@@ -1,7 +1,7 @@
 class Product:
     
     '''
-    Product's builder
+    Product builder
 
     Parameters:
     - name (str): its the name of the product
@@ -29,5 +29,48 @@ class Product:
     def __str__(self):
         return f"Name: {self.name}, Brand: {self.brand}, Stock: {self.stock}, Price: {self.price}€"
     
+    '''
+    getName Method
+
+    This method returns the product name
+    '''
     def getName(self):
         return self.name
+    
+    '''
+    getStock Method
+
+    This method return the product stock
+    '''
+    def getStock(self):
+        return self.stock
+    
+    '''
+    getPrice Method
+
+    This method return the product price
+    '''
+    def getPrice(self):
+        return self.price
+    
+    '''
+    setStock Method
+
+    This method set a new stock in the product
+
+    Paramaters:
+    - stock (int): its the new stock
+    '''
+    def setStock(self, stock:int):
+        self.stock = stock
+    
+    '''
+    setPrice Method
+
+    This method set a new price in the product
+
+    Parameters:
+    - price (float): its the new price
+    '''
+    def setPrice(self, price:float):
+        self.price = price

@@ -43,8 +43,19 @@ class Warehouse:
         - category (str): its the category of the product. This is the key of the dictionary
         - product (Product): its the product object, contains all the information (name, brand, stock, price)
         '''
-        self.products[category].append(product)
-        print("Product added")
+        found = False
+        i = 0
+        while not found and i != len(self.products[category]):
+            if self.products[category][i].getName() != product.getName():
+                i+=1
+            else:
+                print("Can't add the same product twice")
+                found = True
+
+        if not found:
+            self.products[category].append(product)
+            print("Product added")
+
         for i in self.products[category]:
             print(i)
 

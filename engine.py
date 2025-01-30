@@ -76,7 +76,6 @@ class Engine:
         This method show you the options when you add a product in the inventory
         '''
         ok2 = False
-        ok3 = False
         while not ok2:
             clear()
             print("────────────────────────────────────")
@@ -101,6 +100,7 @@ class Engine:
             #Queda comprobar si hay elementos repes
             name = input("Name: ")
             brand = input("Brand: ")
+            ok3 = False
             while(not ok3):
                 stock = int(input("Stock: "))
                 price = float(input("Price: "))

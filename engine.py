@@ -2,40 +2,44 @@ from products import Product
 from warehouse import Warehouse
 import os
 
-'''
-Clear method 
 
-This method cleans all your console
-'''
 def clear():
-        if os.name == 'nt':
-            os.system('cls')
-        else:
-            os.system('clear')
+    '''
+    Clear method 
 
-'''
-Engine class
+    This method cleans all your console
+    '''
+    if os.name == 'nt':
+        os.system('cls')
+    else:
+        os.system('clear')
 
-This class contains the logic of the app
-'''
+
 class Engine:
-
     '''
-    Engine builder
+    Engine class
 
-    Attribute:
-    - warehouse: it's an object of the Warehouse's class
+    This class contains the logic of the app
     '''
+
+    
     def __init__(self):
+        '''
+        Engine builder
+
+        Attribute:
+        - warehouse: it's an object of the Warehouse's class
+        '''
         self.warehouse = Warehouse()
 
     
-    '''
-    Menu method
-
-    This method show you the app menu. Option 1: Show the inventory. Option 2: Add a product into the inventory. Option 3: Exit the app
-    '''
+   
     def menu(self):
+        '''
+        Menu method
+
+        This method show you the app menu. Option 1: Show the inventory. Option 2: Add a product into the inventory. Option 3: Exit the app
+        '''
         ok = False
         while not ok:
             clear()
@@ -64,15 +68,16 @@ class Engine:
                     print("Bye")
                     ok = True
 
-    '''
-    Add_menu method
-
-    This method show you the options when you add a product in the inventory
-    '''
+  
     def add_menu(self):
-         ok2 = False
-         ok3 = False
-         while not ok2:
+        '''
+        Add_menu method
+
+        This method show you the options when you add a product in the inventory
+        '''
+        ok2 = False
+        ok3 = False
+        while not ok2:
             clear()
             print("────────────────────────────────────")
             print("1. Cpu\n2. Gpu\n3. Motherboards\n4. Ram\n0. Exit")
@@ -99,8 +104,9 @@ class Engine:
             while(not ok3):
                 stock = int(input("Stock: "))
                 price = float(input("Price: "))
-                if(stock > 0 and price > 0):
+                if(stock <= 0 or price <= 0):
                     print("The stock and the price aren't negative numbers. Please try again")
+                else:
                     ok3 = True
             print("────────────────────────────────────")
             product = Product(name, brand, stock, price)

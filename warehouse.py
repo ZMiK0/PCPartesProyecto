@@ -17,7 +17,7 @@ class Warehouse:
 
         - self.products: its a dictionary. The keys are the categories of the products and the values are the objects of the product's class
         '''
-        cpu0 = Product("Ryzen 7 5600G", "AMD", 7, 140.32)
+        cpu0 = Product("Ryzen7 5600G", "AMD", 7, 140.32)
         cpu1 = Product("i7 12400H", "Intel", 8, 199.99)
         gpu0 = Product("Dual GeForce RTX 4060", "Asus", 5, 319.95)
         moth0 = Product("B760M D3HP DDR4", "Gigabyte", 3, 99.99)
@@ -30,9 +30,17 @@ class Warehouse:
                 "Ram": [ram0]
                 }
         
-        
-    
-    
+    def show_category(self):
+        '''
+        Shows every category
+        '''
+        print("─────────────────────────────────────────────────────────────────────────────────")
+        index = 0
+        for i in self.products:
+            print(f"{index}: {i}")
+            index += 1
+        print("─────────────────────────────────────────────────────────────────────────────────")
+
     def add(self, category:str, product:Product):
         '''
         Add method
@@ -74,8 +82,8 @@ class Warehouse:
             print("─────────────────────────────────────────────────────────────────────────────────")
             print(f"{i}: ")
             print("")
-            for j in self.products[i]:
-                print(j)
+            for j in range(len(self.products[i])):
+                print(f"{j}: {self.products[i][j]}")
         print("─────────────────────────────────────────────────────────────────────────────────")
     
    
@@ -116,34 +124,63 @@ class Warehouse:
         Parameters:
         - category (str): its the product category, its useful to search easily the product
         '''
-        for key in self.products.keys():
-            if(category.lower() != key.lower()):
-                print("Category isn't correct")
-                input()
-                return
-            else:
-                print("Category's correct")
-                name = input("What product do you want to update?")
-                for product in self.products[key]:
-                    if(name.lower() != product.getName().lower()):
-                        print("The product hasn't been located")
-                        input()
-                        return
-                    else:
-                        print("Do you want to update the stock (1) or the price (2)")
-                        option = input("SELECT: ")
-                        match option:
-                            case "1":
-                                stock = int(input("What's the new stock?: "))
-                                product.setStock(stock)
-                                print(f"The stock has been updated. Stock: {product.getStock()}")
-                                input()
-                                return 
-                            case "2":
-                                price = float(input("What's the new price?: "))
-                                product.setPrice(price)
-                                print(f"The price has been updated. Price: {product.getPrice()}€")
-                                input()
-                                return 
-                            case _:
-                                print("This option isn't correct, please try again")
+        if category in self.products:
+            print("Category found")
+            
+            print("─────────────────────────────────────────────────────────────────────────────────")
+            for j in range(len(self.products[category])):
+                print(f"{j}: {self.products[category][j]}")
+            print("─────────────────────────────────────────────────────────────────────────────────")
+            index = int(input("State the product you want to update (by index number): "))
+            product = self.products[category][index]
+            print("Do you want to update the stock (1) or the price (2)")
+            option = input("SELECT: ")
+            match option:
+                case "1":
+                    stock = int(input("What's the new stock?: "))
+                    product.setStock(stock)
+                    print(f"The stock has been updated. Stock: {product.getStock()}")
+                    input()
+                    return ""
+                case "2":
+                    price = float(input("What's the new price?: "))
+                    product.setPrice(price)
+                    print(f"The price has been updated. Price: {product.getPrice()}€")
+                    input()
+                    return ""
+                case _:
+                    print("This option isn't correct, please try again")
+                    return ""
+        else:
+            print("Category not found")
+            input()
+
+    def remove_product(self, category:str):
+        '''
+        Remove product method
+
+        Removes the product of a category by index
+
+        Parameters:
+        - category (str): The category
+        '''
+        if category in self.products:
+            print("─────────────────────────────────────────────────────────────────────────────────")
+            for j in range(len(self.products[category])):
+                print(f"{j}: {self.products[category][j]}")
+            print("─────────────────────────────────────────────────────────────────────────────────")
+            
+            index:int = int(input("State the product to remove (by index number): "))
+            try:
+                self.products[category].remove(self.products[category][index])
+                print("Product removed succesfully")
+            except:
+                print("Product not found")
+            input("")
+            return ""
+        else:
+            print("Category not found")
+            input("")
+            return ""
+            
+

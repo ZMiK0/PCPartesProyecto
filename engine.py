@@ -44,7 +44,7 @@ class Engine:
         while not ok:
             clear()
             print("────────────────────────────────────")
-            print("1. Show inventory \n2. Add product \n3. Search product \n4. Update product \n0. Exit ")
+            print("1. Show inventory \n2. Add product \n3. Search product \n4. Update product \n5. Remove product \n0. Exit ")
             print("────────────────────────────────────")
             option = input("SELECT: ")
             match option:
@@ -57,13 +57,20 @@ class Engine:
                     self.add_menu()
                 case "3":
                     print("Search a product")
-                    category = input("Please, say the product category: ")
-                    name = input("Please, say the product name: ")
+                    self.warehouse.show_category()
+                    category = input("Please, state the product category: ")
+                    name = input("Please, state the product name: ")
                     self.warehouse.search_product(category, name)
                 case "4":
                     print("Update product")
-                    category = input("Please, say the product category: ")
+                    self.warehouse.show_category()
+                    category = input("Please, state the product category: ")
                     self.warehouse.update_product(category)
+                case "5":
+                    print("Remove product")
+                    self.warehouse.show_category()
+                    category = input("Please, state the product category: ")
+                    self.warehouse.remove_product(category)
                 case _:
                     print("Bye")
                     ok = True

@@ -31,7 +31,7 @@ class Product:
         return f"Name: {self.name}, Brand: {self.brand}, Stock: {self.stock}, Price: {self.price}€"
     
     
-    def getName(self):
+    def getName(self) -> str:
         '''
         getName Method
 

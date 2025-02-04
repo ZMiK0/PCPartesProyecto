@@ -44,7 +44,7 @@ class Engine:
         while not ok:
             clear()
             print("────────────────────────────────────")
-            print("1. Show inventory \n2. Add product \n3. Search product \n4. Update product \n5. Remove product \n0. Exit ")
+            print("1. Show inventory \n2. Add product \n3. Search product \n4. Update product \n5. Remove product \n6. Filter products by price \n0. Exit ")
             print("────────────────────────────────────")
             option = input("SELECT: ")
             match option:
@@ -71,6 +71,10 @@ class Engine:
                     self.warehouse.show_category()
                     category = input("Please, state the product category: ")
                     self.warehouse.remove_product(category)
+                case "6":
+                    print("Filter products by price")
+                    price = float(input("Say the minium price that you can buy: "))
+                    self.warehouse.filter_prices(price)
                 case _:
                     print("Bye")
                     ok = True

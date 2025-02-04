@@ -66,10 +66,6 @@ class Warehouse:
 
         for i in self.products[category]:
             print(i)
-
-    def remove(self):
-        pass # A futuro
-    
     
     def show_products(self):
         '''
@@ -182,5 +178,23 @@ class Warehouse:
             print("Category not found")
             input("")
             return ""
+
+    def filter_prices (self, price:float):
+        '''
+        Filter prices method
+
+        Shows you the products that are lower than the user price
+
+        Parameters:
+        - price (float): The user price
+        '''  
+        for key in self.products.keys():
+            for product in self.products[key]:
+                if(price >= product.getPrice()):
+                    print(f"---- {key} ----")
+                    print(product)
+                    input()
+                else:
+                    pass
             
 

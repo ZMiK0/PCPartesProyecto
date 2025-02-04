@@ -199,6 +199,9 @@ class Warehouse:
     
     def shows_stats(self):
         '''
+        Shows stats method
+
+        Shows you the total warehouse value, the total warehouse stock, the cheapest product and the most expensive product
         '''
         total = 0
         for key in self.products.keys():

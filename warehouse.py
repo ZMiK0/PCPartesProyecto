@@ -196,5 +196,38 @@ class Warehouse:
                     input()
                 else:
                     pass
+    
+    def shows_stats(self):
+        '''
+        '''
+        total = 0
+        for key in self.products.keys():
+            for product in self.products[key]:
+                total += product.getPrice()
+        print("---- Total warehouse value ----")
+        print(f"{total}€")
+        input()
+
+        stock = 0
+        for key in self.products.keys():
+            for product in self.products[key]:
+                stock += product.getStock()
+        print("---- Total warehouse stock ----")
+        print(f"{stock} products")
+        input()
+
+
+        for key in self.products.keys():
+            for product in self.products[key]:
+                print("---- The cheapest product ----")
+                print(f"{min(product.getPrice())}")
+        input()
+
+        for key in self.products.keys():
+            for product in self.products[key]:
+                print("---- The most expensive product ----")
+                print(f"{max(product.getPrice())}")
+        input()
+
             
 

@@ -219,18 +219,21 @@ class Warehouse:
         print(f"{stock} products")
         input()
 
+        box = []
+        price = []
 
         for key in self.products.keys():
             for product in self.products[key]:
-                print("---- The cheapest product ----")
-                print(f"{min(product.getPrice())}")
+                box.append(product.getName())
+                price.append(product.getPrice())
+        print("---- The cheapest product ----")
+        print(f"{box[price.index(min(price))]}: {min(price)}€")
         input()
 
-        for key in self.products.keys():
-            for product in self.products[key]:
-                print("---- The most expensive product ----")
-                print(f"{max(product.getPrice())}")
+        print("---- The expensive product ----")
+        print(f"{box[price.index(max(price))]}: {max(price)}€")
         input()
+
 
             
 

@@ -73,7 +73,7 @@ class Engine:
                     self.warehouse.remove_product(category)
                 case "6":
                     print("Filter products by price")
-                    price = float(input("Say the minium price that you can buy: "))
+                    price = float(input("State the maximum price that you can buy: "))
                     self.warehouse.filter_prices(price)
                 case "7":
                     print("Shows stats")

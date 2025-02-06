@@ -228,7 +228,6 @@ def add_product():
 
 def show_result(category, name, result):
    result.config(text = warehouse.search_product(category, name))
-   result.Label.config(text=result)
 
 def search_product():
    search = tk.Toplevel()
@@ -333,7 +332,66 @@ def search_product():
    search.mainloop()
 
 def update_product():
-   print("Here you can update the stock or the price of the product")
+   update = tk.Toplevel()
+   home.withdraw()
+   update.title("Update a product in PCPartes warehouse")
+
+   update.config(bg = "#C3C3C3")
+   update.geometry("700x300")
+   title_font = font.Font(family = "Oxanium", size = 12, weight = "bold")
+   normal_font = font.Font(family = "Exo 2", size = 10, weight= "bold" )
+
+   title = tk.Label(
+      update,
+      text = "State the category and the price or the stock",
+      font = title_font,
+      bg = "#C3C3C3",
+      fg = "#102323",
+      justify = "center",
+      anchor = "center"
+   )
+   title.grid(row = 0, column = 0, pady = 20, sticky = "nsew")
+
+   category_text = tk.Label(
+      update,
+      text = "State the category and the name",
+      font = title_font,
+      bg = "#C3C3C3",
+      fg = "#102323",
+      justify = "center",
+      anchor = "center"
+   )
+   category_text.grid(row = 1, column = 0, pady = 10)
+
+   category = tk.Entry(update)
+   category.config(
+      bg = "#C3C3C3",
+      fg = "#102323",
+      font = normal_font
+   )
+   category.grid(row = 1, column = 1, pady = 10, padx = 10)
+   category.insert(0, "Enter your text...")
+   category.bind("<FocusIn>", on_focus_in)
+   category.bind("<FocusOut>", on_focus_out)
+
+   option_text = tk.Label(
+      update,
+      text = "Please select the price or the stock",
+      font = title_font,
+      bg = "#C3C3C3",
+      fg = "#102323",
+      justify = "center",
+      anchor = "center"
+   )
+   option_text.grid(row = 1, column = 2, pady = 10)
+
+   radio_var = tk.StringVar(value="Opción 1")
+   radio1 = tk.Radiobutton(update, text="Opción 1", variable=radio_var, value="Price", command="")
+   radio2 = tk.Radiobutton(update, text="Opción 2", variable=radio_var, value="Stock", command="")
+   radio1.pack()
+   radio2.pack()
+
+
 
 def remove_product():
    print("Here you can delete a product")

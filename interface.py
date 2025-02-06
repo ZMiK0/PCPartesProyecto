@@ -226,8 +226,111 @@ def add_product():
 
    product.mainloop()
 
+def show_result(category, name, result):
+   result.config(text = warehouse.search_product(category, name))
+   result.Label.config(text=result)
+
 def search_product():
-   print("Here you can search a product by name")
+   search = tk.Toplevel()
+   home.withdraw()
+   search.title("Seach a product in PCPartes warehouse")
+
+   search.config(bg = "#C3C3C3")
+   search.geometry("700x300")
+   title_font = font.Font(family = "Oxanium", size = 12, weight = "bold")
+   normal_font = font.Font(family = "Exo 2", size = 10, weight= "bold" )
+
+   title = tk.Label(
+      search,
+      text = "State the category and the name",
+      font = title_font,
+      bg = "#C3C3C3",
+      fg = "#102323",
+      justify = "center",
+      anchor = "center"
+   )
+   title.grid(row = 0, column = 0, pady = 20, sticky = "nsew")
+
+   category_text = tk.Label(
+      search, 
+      text = "Category",
+      font = normal_font,
+      bg = "#C3C3C3",
+      fg = "#102323",
+   )
+   category_text.grid(row = 1, column = 0, pady = 10)
+
+   category = tk.Entry(search)
+   category.config(
+      bg = "#C3C3C3",
+      fg = "#102323",
+      font = normal_font
+   )
+   category.grid(row = 1, column = 1, pady = 10, padx = 10)
+   category.insert(0, "Enter your text...")
+   category.bind("<FocusIn>", on_focus_in)
+   category.bind("<FocusOut>", on_focus_out)
+
+   name_text = tk.Label(
+      search,
+      text = "Name",
+      font = normal_font,
+      bg = "#C3C3C3",
+      fg = "#102323"
+   )
+   name_text.grid(row = 1, column = 2, pady = 10)
+
+   name = tk.Entry(search)
+   name.config(
+      bg = "#C3C3C3",
+      fg = "#102323",
+      font = normal_font
+   )
+   name.grid(row = 1, column = 3, pady = 10, padx = 10)
+   name.insert(0, "Enter your text...")
+   name.bind("<FocusIn>", on_focus_in)
+   name.bind("<FocusOut>", on_focus_out)
+
+   result = tk.Label(
+      search,
+      text = "",
+      font = normal_font,
+      bg = "#C3C3C3",
+      fg = "#102323"
+   )
+   result.grid(row = 3, column = 0, columnspan = 4, pady = 10, padx = 10)
+
+   search_button = tk.Button(
+      search,
+      text = "Search product",
+      width = 20,
+      height = 1,
+      fg = "#102323",
+      bg = "#FCFCF7",
+      relief = "flat",
+      font = normal_font,
+      command = lambda: show_result(category.get(), name.get(), result)
+   )
+   
+   search_button.grid(row = 2, column = 0, columnspan = 2, pady = 10, padx = 10)
+   search_button.bind("<Enter>", on_enter)
+   search_button.bind("<Leave>", on_leave)
+
+   close_button = tk.Button(
+      search,
+      text = "Exit",
+      width = 20,
+      height = 1,
+      fg = "#102323",
+      bg = "#FCFCF7",
+      relief = "flat",
+      font = normal_font,
+      command=lambda: (home.deiconify(), search.destroy())
+   )
+   close_button.grid(row = 3, column = 0, columnspan = 4, pady = 10, padx = 10)
+   close_button.bind("<Enter>", on_enter)
+   close_button.bind("<Leave>", on_leave)
+   search.mainloop()
 
 def update_product():
    print("Here you can update the stock or the price of the product")

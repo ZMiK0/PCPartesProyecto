@@ -95,22 +95,24 @@ class Warehouse:
         - category (str): its the product category, its useful to search easily the product
         - name (str): its the product name, its useful to locate easily the product
         '''
+        chain = ""
         for key in self.products.keys():
             if (category.lower() != key.lower()):
                 print("Category isn't correct")
-                input()
+                #input()
                 break
             else:
                 print("Category's correct")
                 for product in self.products[key]:
                     if(name.lower() == product.getName().lower()):
-                        print(f"The product has been located: {product}")
-                        input()
+                        chain += f"The product has been located: {product}"
+                        #input()
                         break
                     else:
-                        print("The product hasn't been located")
-                        input()
+                        chain += "The product hasn't been located"
+                        #input()
                         break
+        return chain
     
     
     def update_product(self, category:str):

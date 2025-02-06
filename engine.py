@@ -38,7 +38,7 @@ class Engine:
         '''
         Menu method
 
-        This method show you the app menu. Option 1: Show the inventory. Option 2: Add a product into the inventory. Option 3: Exit the app
+        This method show you the app menu.
         '''
         ok = False
         while not ok:

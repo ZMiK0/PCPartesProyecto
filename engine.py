@@ -123,7 +123,7 @@ class Engine:
                 else:
                     ok3 = True
             print("────────────────────────────────────")
-            product = Product(name, brand, stock, price)
+            
             if category != None:
-                self.warehouse.add(category, product)
+                self.warehouse.add(category, name,brand,stock,price)
                 input()

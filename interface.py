@@ -203,7 +203,7 @@ def add_product():
       bg = "#FCFCF7",
       relief = "flat",
       font = normal_font,
-      command = ""
+      command =lambda: warehouse.add(category.get(),name.get(),brand.get(),stock.get(),price.get())
    )
    add_button.grid(row = 3, column = 2, columnspan = 2, pady = 10, padx = 10)
    add_button.bind("<Enter>", on_enter)

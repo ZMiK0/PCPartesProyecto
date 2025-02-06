@@ -41,7 +41,7 @@ class Warehouse:
             index += 1
         print("─────────────────────────────────────────────────────────────────────────────────")
 
-    def add(self, category:str, product:Product):
+    def add(self, category:str, name:str, brand:str, stock:int, price:float):
         '''
         Add method
 
@@ -51,6 +51,7 @@ class Warehouse:
         - category (str): its the category of the product. This is the key of the dictionary
         - product (Product): its the product object, contains all the information (name, brand, stock, price)
         '''
+        product = Product(name, brand, stock, price)
         found = False
         i = 0
         while not found and i != len(self.products[category]):

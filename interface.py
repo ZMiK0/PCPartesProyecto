@@ -4,8 +4,6 @@ from warehouse import Warehouse
 
 home = tk.Tk()
 home.title("Welcome to PCPartes!")
-title_font = font.Font(family = "Oxanium Regular", size = 12, weight = "bold")
-normal_font = font.Font(family = "Exo 2 Regular", size = 10, weight= "bold" )
 warehouse = Warehouse()
 
 # Hover methods
@@ -22,29 +20,31 @@ def show_inventory():
    inventory.title("PCPartes warehouse")
    
    inventory.config(bg = "#C3C3C3")
-   inventory.geometry("500x200")
+   inventory.geometry("650x300")
+   title_font = font.Font(family = "Oxanium Regular", size = 12, weight = "bold")
+   normal_font = font.Font(family = "Exo 2", size = 10, weight= "bold" )
 
    text = tk.Label(
       inventory,
-      text = warehouse.show_products,
+      text = warehouse.show_products(),
       font = normal_font,
       bg = "#C3C3C3",
       fg = "#102323",
-      anchor = "center",
-      justify = "center"
+      justify="left"
    )
-   text.grid(row = 0, column = 0, pady = 20, sticky = "nsew")
+   text.grid(row = 0, column = 0, pady = 20)
+   print(text.cget("font"))
 
    close_button = tk.Button(
-        inventory,
-        text = "Exit",
-        width = 20,
-        height = 1,
-        fg = "#102323",
-        bg = "#FCFCF7",
-        relief = "flat", #Border style
-        font = normal_font,
-        command = inventory.destroy
+      inventory,
+      text = "Exit",
+      width = 20,
+      height = 1,
+      fg = "#102323",
+      bg = "#FCFCF7",
+      relief = "flat", #Border style
+      font = normal_font,
+      command = lambda :(inventory.destroy(), home.deiconify())
    )
    close_button.grid(row = 1, column = 0, pady = 10, padx = 10)
    close_button.bind("<Enter>", on_enter)
@@ -78,6 +78,8 @@ home.geometry("700x400")
 home.columnconfigure(0, weight = 1)
 home.columnconfigure(1, weight = 1)
 home.columnconfigure(2, weight = 1)
+title_font = font.Font(family = "Oxanium Regular", size = 12, weight = "bold")
+normal_font = font.Font(family = "Exo 2", size = 10, weight= "bold" )
 
 title = tk.Label(
     home, 

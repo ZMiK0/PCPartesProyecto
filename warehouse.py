@@ -73,14 +73,16 @@ class Warehouse:
 
         This method shows you completetly the dictionary
         '''
-        
+        chain = ""
         for i in self.products:
             print("─────────────────────────────────────────────────────────────────────────────────")
             print(f"{i}: ")
             print("")
             for j in range(len(self.products[i])):
-                print(f"{j}: {self.products[i][j]}")
+                chain += (f"{j}: {self.products[i][j]}\n")
         print("─────────────────────────────────────────────────────────────────────────────────")
+        print(chain)
+        return chain
     
    
     def search_product(self, category:str, name:str):

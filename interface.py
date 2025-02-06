@@ -12,17 +12,39 @@ def on_enter(event):
 
 def on_leave(event):
    event.widget.config(bg = "#FCFCF7")
+
+# Placeholder methods
+def on_focus_in(event):
+    if event.widget.get() == "Enter your text...":
+        event.widget.delete(0, tk.END)
+
+def on_focus_out(event):
+    if event.widget.get() == "":
+        event.widget.insert(0, "Enter your text...")
    
 
 def show_inventory():
-   inventory = tk.Tk()
+   '''
+   Aquí falta agregar la categoria. Una buena idea sustituir el numerito por la categoria
+   '''
+   inventory = tk.Toplevel()
    home.withdraw() #Hide the window
    inventory.title("PCPartes warehouse")
    
    inventory.config(bg = "#C3C3C3")
-   inventory.geometry("650x300")
-   title_font = font.Font(family = "Oxanium Regular", size = 12, weight = "bold")
+   inventory.geometry("550x300")
+   title_font = font.Font(family = "Oxanium", size = 12, weight = "bold")
    normal_font = font.Font(family = "Exo 2", size = 10, weight= "bold" )
+
+   title = tk.Label(
+      inventory,
+      text = "List of products",
+      font = title_font,
+      bg = "#C3C3C3",
+      fg = "#102323",
+      justify = "center"
+   )
+   title.grid(row = 0, column = 0, pady = 20, sticky = "nsew")
 
    text = tk.Label(
       inventory,
@@ -32,8 +54,7 @@ def show_inventory():
       fg = "#102323",
       justify="left"
    )
-   text.grid(row = 0, column = 0, pady = 20)
-   print(text.cget("font"))
+   text.grid(row = 1, column = 0, pady = 20)
 
    close_button = tk.Button(
       inventory,
@@ -44,17 +65,166 @@ def show_inventory():
       bg = "#FCFCF7",
       relief = "flat", #Border style
       font = normal_font,
-      command = lambda :(inventory.destroy(), home.deiconify())
+      command=lambda: (home.deiconify(), inventory.destroy())
    )
-   close_button.grid(row = 1, column = 0, pady = 10, padx = 10)
+   close_button.grid(row = 2, column = 0, pady = 10, padx = 10)
    close_button.bind("<Enter>", on_enter)
    close_button.bind("<Leave>", on_leave)
 
    inventory.mainloop()
 
-
 def add_product():
-   print("Here you can add a product")
+   product = tk.Toplevel()
+   home.withdraw()
+   product.title("Add product in PCPartes warehouse")
+
+   product.config(bg = "#C3C3C3")
+   product.geometry("550x300")
+   title_font = font.Font(family = "Oxanium", size = 12, weight = "bold")
+   normal_font = font.Font(family = "Exo 2", size = 10, weight= "bold" )
+
+   title = tk.Label(
+      product,
+      text = "State the product",
+      font = title_font,
+      bg = "#C3C3C3",
+      fg = "#102323",
+      justify = "center",
+      anchor = "center"
+   )
+   title.grid(row = 0, column = 0, pady = 20, sticky = "nsew")
+
+   category_text = tk.Label(
+      product, 
+      text = "Category",
+      font = normal_font,
+      bg = "#C3C3C3",
+      fg = "#102323",
+   )
+   category_text.grid(row = 1, column = 0, pady = 10)
+
+   category = tk.Entry(product)
+   category.config(
+      bg = "#C3C3C3",
+      fg = "#102323",
+      font = normal_font
+   )
+   category.grid(row = 1, column = 1, pady = 10, padx = 10)
+   category.insert(0, "Enter your text...")
+   category.bind("<FocusIn>", on_focus_in)
+   category.bind("<FocusOut>", on_focus_out)
+
+   name_text = tk.Label(
+      product,
+      text = "Name",
+      font = normal_font,
+      bg = "#C3C3C3",
+      fg = "#102323"
+   )
+   name_text.grid(row = 1, column = 2, pady = 10)
+
+   name = tk.Entry(product)
+   name.config(
+      bg = "#C3C3C3",
+      fg = "#102323",
+      font = normal_font
+   )
+   name.grid(row = 1, column = 3, pady = 10, padx = 10)
+   name.insert(0, "Enter your text...")
+   name.bind("<FocusIn>", on_focus_in)
+   name.bind("<FocusOut>", on_focus_out)
+
+   brand_text = tk.Label(
+      product,
+      text = "Brand",
+      font = normal_font,
+      bg = "#C3C3C3",
+      fg = "#102323"
+   )
+   brand_text.grid(row = 2, column = 0, pady = 10)
+
+   brand = tk.Entry(product)
+   brand.config(
+      bg = "#C3C3C3",
+      fg = "#102323",
+      font = normal_font
+   )
+   brand.grid(row = 2, column = 1, pady = 10, padx = 10)
+   brand.insert(0, "Enter your text...")
+   brand.bind("<FocusIn>", on_focus_in)
+   brand.bind("<FocusOut>", on_focus_out)
+
+   stock_text = tk.Label(
+      product,
+      text = "Stock",
+      font = normal_font,
+      bg = "#C3C3C3",
+      fg = "#102323"
+   )
+   stock_text.grid(row = 2, column = 2, pady = 10)
+
+   stock = tk.Entry(product)
+   stock.config(
+      bg = "#C3C3C3",
+      fg = "#102323",
+      font = normal_font
+   )
+   stock.grid(row = 2, column = 3, pady = 10, padx = 10)
+   stock.insert(0, "Enter your text...")
+   stock.bind("<FocusIn>", on_focus_in)
+   stock.bind("<FocusOut>", on_focus_out)
+
+   price_text = tk.Label(
+      product,
+      text = "Price",
+      font = normal_font,
+      bg = "#C3C3C3",
+      fg = "#102323"
+   )
+   price_text.grid(row = 3, column = 0, pady = 10)
+
+   price = tk.Entry(product)
+   price.config(
+      bg = "#C3C3C3",
+      fg = "#102323",
+      font = normal_font
+   )
+   price.grid(row = 3, column = 1, pady = 10, padx = 10)
+   price.insert(0, "Enter your text...")
+   price.bind("<FocusIn>", on_focus_in)
+   price.bind("<FocusOut>", on_focus_out)
+
+   add_button = tk.Button(
+      product,
+      text = "Add product",
+      width = 20,
+      height = 1,
+      fg = "#102323",
+      bg = "#FCFCF7",
+      relief = "flat",
+      font = normal_font,
+      command = ""
+   )
+   add_button.grid(row = 3, column = 2, columnspan = 2, pady = 10, padx = 10)
+   add_button.bind("<Enter>", on_enter)
+   add_button.bind("<Leave>", on_leave)
+
+   close_button = tk.Button(
+      product,
+      text = "Exit",
+      width = 20,
+      height = 1,
+      fg = "#102323",
+      bg = "#FCFCF7",
+      relief = "flat",
+      font = normal_font,
+      command=lambda: (home.deiconify(), product.destroy())
+   )
+   close_button.grid(row = 4, column = 0, columnspan = 4, pady = 10, padx = 10)
+   close_button.bind("<Enter>", on_enter)
+   close_button.bind("<Leave>", on_leave)
+
+   product.mainloop()
 
 def search_product():
    print("Here you can search a product by name")
@@ -78,7 +248,7 @@ home.geometry("700x400")
 home.columnconfigure(0, weight = 1)
 home.columnconfigure(1, weight = 1)
 home.columnconfigure(2, weight = 1)
-title_font = font.Font(family = "Oxanium Regular", size = 12, weight = "bold")
+title_font = font.Font(family = "Oxanium", size = 12, weight = "bold")
 normal_font = font.Font(family = "Exo 2", size = 10, weight= "bold" )
 
 title = tk.Label(

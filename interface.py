@@ -1,11 +1,57 @@
 import tkinter as tk
 from tkinter import font
+from warehouse import Warehouse
 
 home = tk.Tk()
 home.title("Welcome to PCPartes!")
+title_font = font.Font(family = "Oxanium Regular", size = 12, weight = "bold")
+normal_font = font.Font(family = "Exo 2 Regular", size = 10, weight= "bold" )
+warehouse = Warehouse()
+
+# Hover methods
+def on_enter(event):
+   event.widget.config(bg = "#A9C61C")
+
+def on_leave(event):
+   event.widget.config(bg = "#FCFCF7")
+   
 
 def show_inventory():
-   print("This is the inventory")
+   inventory = tk.Tk()
+   home.withdraw() #Hide the window
+   inventory.title("PCPartes warehouse")
+   
+   inventory.config(bg = "#C3C3C3")
+   inventory.geometry("500x200")
+
+   text = tk.Label(
+      inventory,
+      text = warehouse.show_products,
+      font = normal_font,
+      bg = "#C3C3C3",
+      fg = "#102323",
+      anchor = "center",
+      justify = "center"
+   )
+   text.grid(row = 0, column = 0, pady = 20, sticky = "nsew")
+
+   close_button = tk.Button(
+        inventory,
+        text = "Exit",
+        width = 20,
+        height = 1,
+        fg = "#102323",
+        bg = "#FCFCF7",
+        relief = "flat", #Border style
+        font = normal_font,
+        command = inventory.destroy
+   )
+   close_button.grid(row = 1, column = 0, pady = 10, padx = 10)
+   close_button.bind("<Enter>", on_enter)
+   close_button.bind("<Leave>", on_leave)
+
+   inventory.mainloop()
+
 
 def add_product():
    print("Here you can add a product")
@@ -25,19 +71,10 @@ def filter_product():
 def show_stats():
    print("Shows the shop stats")
 
-# Hover methods
-def on_enter(event):
-   event.widget.config(bg = "#A9C61C")
-
-def on_leave(event):
-   event.widget.config(bg = "#FCFCF7")
-
 
 # Home window configuration
 home.config(bg = "#C3C3C3")
 home.geometry("700x400")
-title_font = font.Font(family = "Oxanium Regular", size = 12, weight = "bold")
-normal_font = font.Font(family = "Exo 2 Regular", size = 10, weight= "bold" )
 home.columnconfigure(0, weight = 1)
 home.columnconfigure(1, weight = 1)
 home.columnconfigure(2, weight = 1)
@@ -160,4 +197,3 @@ button_7.bind("<Enter>", on_enter)
 button_7.bind("<Leave>", on_leave)
 
 home.mainloop()
-

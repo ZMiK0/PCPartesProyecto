@@ -60,7 +60,8 @@ class Engine:
                     self.warehouse.show_category()
                     category = input("Please, state the product category: ")
                     name = input("Please, state the product name: ")
-                    self.warehouse.search_product(category, name)
+                    print(self.warehouse.search_product(category, name))
+                    input()
                 case "4":
                     print("Update product")
                     self.warehouse.show_category()

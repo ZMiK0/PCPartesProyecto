@@ -97,22 +97,15 @@ class Warehouse:
         - name (str): its the product name, its useful to locate easily the product
         '''
         chain = ""
-        for key in self.products.keys():
-            if (category.lower() != key.lower()):
-                print("Category isn't correct")
-                #input()
-                break
-            else:
-                print("Category's correct")
-                for product in self.products[key]:
-                    if(name.lower() == product.getName().lower()):
-                        chain += f"The product has been located: {product}"
-                        #input()
-                        break
-                    else:
-                        chain += "The product hasn't been located"
-                        #input()
-                        break
+        try:
+            print("Category's correct")
+            for product in self.products[category]:
+                if(name == product.getName()):
+                    chain += f"The product has been located: {product}"
+                    input()
+                    break
+        except:
+            print("Wrong")
         return chain
     
     
@@ -167,14 +160,11 @@ class Warehouse:
                         product.setPrice(number)
                         print("Price updated")
                         return ""
-
-
-            
         else:
             print("Category not found")
             input()
 
-    def remove_product(self, category:str):
+    def remove_product(self, category:str, name=""):
         '''
         Remove product method
 
@@ -183,24 +173,32 @@ class Warehouse:
         Parameters:
         - category (str): The category
         '''
-        if category in self.products:
-            print("─────────────────────────────────────────────────────────────────────────────────")
-            for j in range(len(self.products[category])):
-                print(f"{j}: {self.products[category][j]}")
-            print("─────────────────────────────────────────────────────────────────────────────────")
-            
-            index:int = int(input("State the product to remove (by index number): "))
-            try:
-                self.products[category].remove(self.products[category][index])
-                print("Product removed succesfully")
-            except:
-                print("Product not found")
-            input("")
-            return ""
+        if name == "":
+            if category in self.products:
+                print("─────────────────────────────────────────────────────────────────────────────────")
+                for j in range(len(self.products[category])):
+                    print(f"{j}: {self.products[category][j]}")
+                print("─────────────────────────────────────────────────────────────────────────────────")
+                
+                index:int = int(input("State the product to remove (by index number): "))
+                try:
+                    self.products[category].remove(self.products[category][index])
+                    print("Product removed succesfully")
+                except:
+                    print("Product not found")
+                input("")
+                return ""
+            else:
+                print("Category not found")
+                input("")
+                return ""
         else:
-            print("Category not found")
-            input("")
-            return ""
+            for i in self.products[category]:
+                if i.getName() == name:
+                    product = self.products[category][self.products[category].index(i)]
+            self.products[category].remove(product)
+            print("Product removed") 
+
 
     def filter_prices (self, price:float):
         '''

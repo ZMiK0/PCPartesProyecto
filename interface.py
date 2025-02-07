@@ -297,7 +297,7 @@ def search_product():
       bg = "#C3C3C3",
       fg = "#102323"
    )
-   result.grid(row = 3, column = 0, columnspan = 4, pady = 10, padx = 10)
+   result.grid(row = 4, column = 0, columnspan = 4, pady = 10, padx = 10)
 
    search_button = tk.Button(
       search,
@@ -326,7 +326,7 @@ def search_product():
       font = normal_font,
       command=lambda: (home.deiconify(), search.destroy())
    )
-   close_button.grid(row = 3, column = 0, columnspan = 4, pady = 10, padx = 10)
+   close_button.grid(row = 5, column = 0, columnspan = 4, pady = 10, padx = 10)
    close_button.bind("<Enter>", on_enter)
    close_button.bind("<Leave>", on_leave)
    search.mainloop()
@@ -651,7 +651,7 @@ def filter_product():
       bg = "#FCFCF7",
       relief = "flat",
       font = normal_font,
-      command = lambda: method_filter(price.get(), result)
+      command = lambda: method_filter(float(price.get()), result)
    )
    filter_button.grid(row = 1, column = 2, pady = 10, padx = 10)
    filter_button.bind("<Enter>", on_enter)

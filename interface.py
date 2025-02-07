@@ -331,6 +331,10 @@ def search_product():
    close_button.bind("<Leave>", on_leave)
    search.mainloop()
 
+def method_update(category, type, number, result):
+   result.config(text = warehouse.update_product(category, type, number))
+
+
 def update_product():
    update = tk.Toplevel()
    home.withdraw()
@@ -386,11 +390,78 @@ def update_product():
    option_text.grid(row = 1, column = 2, pady = 10)
 
    radio_var = tk.StringVar(value="Opción 1")
-   radio1 = tk.Radiobutton(update, text="Opción 1", variable=radio_var, value="Price", command="")
-   radio2 = tk.Radiobutton(update, text="Opción 2", variable=radio_var, value="Stock", command="")
-   radio1.pack()
-   radio2.pack()
+   radio1 = tk.Radiobutton(update, text="Price", variable=radio_var, value="Price", command="")
+   radio2 = tk.Radiobutton(update, text="Stock", variable=radio_var, value="Stock", command="")
+   radio1.grid(row = 1, column = 3, pady = 10, padx = 10)
+   radio2.grid(row = 2, column = 3, pady = 10, padx = 10)
 
+   if(radio_var.get() == "Price"):
+      type = "price"
+   else:
+      type = "stock"
+
+   number_text = tk.Label(
+      update,
+      text = "State the quantity",
+      font = title_font,
+      bg = "#C3C3C3",
+      fg = "#102323",
+      justify = "center",
+      anchor = "center"
+   )
+   number_text.grid(row = 2, column = 0, pady = 10)
+
+   number = tk.Entry(update)
+   number.config(
+      bg = "#C3C3C3",
+      fg = "#102323",
+      font = normal_font
+   )
+   number.grid(row = 2, column = 1, pady = 10, padx = 10)
+   number.insert(0, "Enter your text...")
+   number.bind("<FocusIn>", on_focus_in)
+   number.bind("<FocusOut>", on_focus_out)
+
+   result = tk.Label(
+      update,
+      text = "",
+      font = normal_font,
+      bg = "#C3C3C3",
+      fg = "#102323"
+   )
+   result.grid(row = 3, column = 0, columnspan= 4, pady = 10, padx = 10)
+
+   update_button = tk.Button(
+      number,
+      text = "Search product",
+      width = 20,
+      height = 1,
+      fg = "#102323",
+      bg = "#FCFCF7",
+      relief = "flat",
+      font = normal_font,
+      command = lambda: method_update(category.get(), type, number.get(), result)
+   )
+   update_button.grid(row = 4, column = 0, columnspan = 2, pady = 10, padx = 10)
+   update_button.bind("<Enter>", on_enter)
+   update_button.bind("<Leave>", on_leave)
+
+   close_button = tk.Button(
+      update,
+      text = "Exit",
+      width = 20,
+      height = 1,
+      fg = "#102323",
+      bg = "#FCFCF7",
+      relief = "flat",
+      font = normal_font,
+      command=lambda: (home.deiconify(), update.destroy())
+   )
+   close_button.grid(row = 3, column = 0, columnspan = 4, pady = 10, padx = 10)
+   close_button.bind("<Enter>", on_enter)
+   close_button.bind("<Leave>", on_leave)
+
+   update.mainloop()
 
 
 def remove_product():

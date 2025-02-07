@@ -125,6 +125,7 @@ class Warehouse:
         Parameters:
         - category (str): its the product category, its useful to search easily the product
         '''
+        chain = ""
         if category in self.products:
             print("Category found")
             

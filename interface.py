@@ -331,8 +331,8 @@ def search_product():
    close_button.bind("<Leave>", on_leave)
    search.mainloop()
 
-def method_update(category, type, number, result):
-   result.config(text = warehouse.update_product(category, type, number))
+def method_update(category, type, number, name, result):
+   result.config(text = warehouse.update_product(category, type, name, number))
 
 
 def update_product():
@@ -341,7 +341,7 @@ def update_product():
    update.title("Update a product in PCPartes warehouse")
 
    update.config(bg = "#C3C3C3")
-   update.geometry("700x300")
+   update.geometry("1000x300")
    title_font = font.Font(family = "Oxanium", size = 12, weight = "bold")
    normal_font = font.Font(family = "Exo 2", size = 10, weight= "bold" )
 
@@ -358,7 +358,7 @@ def update_product():
 
    category_text = tk.Label(
       update,
-      text = "State the category and the name",
+      text = "State the category",
       font = title_font,
       bg = "#C3C3C3",
       fg = "#102323",
@@ -377,6 +377,28 @@ def update_product():
    category.insert(0, "Enter your text...")
    category.bind("<FocusIn>", on_focus_in)
    category.bind("<FocusOut>", on_focus_out)
+
+   name_text = tk.Label(
+      update,
+      text = "State the name",
+      font = title_font,
+      bg = "#C3C3C3",
+      fg = "#102323",
+      justify = "center",
+      anchor = "center"
+   )
+   name_text.grid(row = 2, column = 0, pady = 10)
+
+   name = tk.Entry(update)
+   name.config(
+      bg = "#C3C3C3",
+      fg = "#102323",
+      font = normal_font
+   )
+   name.grid(row = 2, column = 1, pady = 10, padx = 10)
+   name.insert(0, "Enter your text...")
+   name.bind("<FocusIn>", on_focus_in)
+   name.bind("<FocusOut>", on_focus_out)
 
    option_text = tk.Label(
       update,
@@ -409,7 +431,7 @@ def update_product():
       justify = "center",
       anchor = "center"
    )
-   number_text.grid(row = 2, column = 0, pady = 10)
+   number_text.grid(row = 3, column = 0, pady = 10)
 
    number = tk.Entry(update)
    number.config(
@@ -417,7 +439,7 @@ def update_product():
       fg = "#102323",
       font = normal_font
    )
-   number.grid(row = 2, column = 1, pady = 10, padx = 10)
+   number.grid(row = 3, column = 1, pady = 10, padx = 10)
    number.insert(0, "Enter your text...")
    number.bind("<FocusIn>", on_focus_in)
    number.bind("<FocusOut>", on_focus_out)
@@ -429,20 +451,20 @@ def update_product():
       bg = "#C3C3C3",
       fg = "#102323"
    )
-   result.grid(row = 3, column = 0, columnspan= 4, pady = 10, padx = 10)
+   result.grid(row = 4, column = 0, columnspan= 4, pady = 10, padx = 10)
 
    update_button = tk.Button(
-      number,
-      text = "Search product",
+      update,
+      text = "Update product",
       width = 20,
       height = 1,
       fg = "#102323",
       bg = "#FCFCF7",
       relief = "flat",
       font = normal_font,
-      command = lambda: method_update(category.get(), type, number.get(), result)
+      command = lambda: method_update(category.get(), type, name.get(), number.get(), result)
    )
-   update_button.grid(row = 4, column = 0, columnspan = 2, pady = 10, padx = 10)
+   update_button.grid(row = 3, column = 2, pady = 10, padx = 10)
    update_button.bind("<Enter>", on_enter)
    update_button.bind("<Leave>", on_leave)
 
@@ -457,7 +479,7 @@ def update_product():
       font = normal_font,
       command=lambda: (home.deiconify(), update.destroy())
    )
-   close_button.grid(row = 3, column = 0, columnspan = 4, pady = 10, padx = 10)
+   close_button.grid(row = 5, column = 0, columnspan = 4, pady = 10, padx = 10)
    close_button.bind("<Enter>", on_enter)
    close_button.bind("<Leave>", on_leave)
 

@@ -467,11 +467,138 @@ def update_product():
 def remove_product():
    print("Here you can delete a product")
 
+def method_filter(price, result):
+   result.config(text = warehouse.filter_prices(float(price)))
+
 def filter_product():
-   print("Here you can filter a product by price")
+   filterw = tk.Toplevel()
+   home.withdraw()
+   filterw.title("Filter a product by price")
+
+   filterw.config(bg = "#C3C3C3")
+   filterw.geometry("600x400")
+   title_font = font.Font(family = "Oxanium", size = 12, weight = "bold")
+   normal_font = font.Font(family = "Exo 2", size = 10, weight= "bold" )
+
+   title = tk.Label(
+      filterw,
+      text = "PCParts filter products",
+      font = title_font,
+      bg = "#C3C3C3",
+      fg = "#102323",
+      justify = "center"
+   )
+   title.grid(row = 0, column = 0, pady = 20, sticky = "nsew")
+
+   price_text = tk.Label(
+      filterw,
+      text = "State the maximum product",
+      font = normal_font,
+      bg = "#C3C3C3",
+      fg = "#102323",
+      justify = "center"
+   )
+   price_text.grid(row = 1, column = 0, pady = 10)
+
+   price = tk.Entry(filterw)
+   price.config(
+      bg = "#C3C3C3",
+      fg = "#102323",
+      font = normal_font
+   )
+   price.grid(row = 1, column = 1, pady = 10, padx = 10)
+   price.insert(0, "Enter your text...")
+   price.bind("<FocusIn>", on_focus_in)
+   price.bind("<FocusOut>", on_focus_out)
+
+   result = tk.Label(
+      filterw,
+      text = "",
+      font = normal_font,
+      bg = "#C3C3C3",
+      fg = "#102323",
+      justify = "center"
+   )
+   result.grid(row = 3, column = 0, pady = 10)
+
+   filter_button = tk.Button(
+      filterw,
+      text = "Filter products",
+      width = 20,
+      height = 1,
+      fg = "#102323",
+      bg = "#FCFCF7",
+      relief = "flat",
+      font = normal_font,
+      command = lambda: method_filter(price.get(), result)
+   )
+   filter_button.grid(row = 1, column = 2, pady = 10, padx = 10)
+   filter_button.bind("<Enter>", on_enter)
+   filter_button.bind("<Leave>", on_leave)
+
+   close_button = tk.Button(
+      filterw,
+      text = "Exit",
+      width = 20,
+      height = 1,
+      fg = "#102323",
+      bg = "#FCFCF7",
+      relief = "flat", #Border style
+      font = normal_font,
+      command=lambda: (home.deiconify(), filterw.destroy())
+   )
+   close_button.grid(row = 2, column = 0, pady = 10, padx = 10)
+   close_button.bind("<Enter>", on_enter)
+   close_button.bind("<Leave>", on_leave)
+
+   filterw.mainloop()
 
 def show_stats():
-   print("Shows the shop stats")
+   stats = tk.Toplevel()
+   home.withdraw() #Hide the window
+   stats.title("PCPartes stats")
+   
+   stats.config(bg = "#C3C3C3")
+   stats.geometry("300x350")
+   title_font = font.Font(family = "Oxanium", size = 12, weight = "bold")
+   normal_font = font.Font(family = "Exo 2", size = 10, weight= "bold" )
+
+   title = tk.Label(
+      stats,
+      text = "PCPartes Stats",
+      font = title_font,
+      bg = "#C3C3C3",
+      fg = "#102323",
+      justify = "center"
+   )
+   title.grid(row = 0, column = 0, pady = 20, sticky = "nsew")
+
+   text = tk.Label(
+      stats,
+      text = warehouse.shows_stats(),
+      font = normal_font,
+      bg = "#C3C3C3",
+      fg = "#102323",
+      justify="left"
+   )
+   text.grid(row = 1, column = 0, pady = 20)
+
+   close_button = tk.Button(
+      stats,
+      text = "Exit",
+      width = 20,
+      height = 1,
+      fg = "#102323",
+      bg = "#FCFCF7",
+      relief = "flat", #Border style
+      font = normal_font,
+      command=lambda: (home.deiconify(), stats.destroy())
+   )
+   close_button.grid(row = 2, column = 0, pady = 10, padx = 10)
+   close_button.bind("<Enter>", on_enter)
+   close_button.bind("<Leave>", on_leave)
+
+   stats.mainloop()
 
 
 # Home window configuration

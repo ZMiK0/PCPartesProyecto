@@ -194,14 +194,17 @@ class Warehouse:
         Parameters:
         - price (float): The user price
         '''  
+        chain = ""
         for key in self.products.keys():
             for product in self.products[key]:
                 if(price >= product.getPrice()):
-                    print(f"---- {key} ----")
-                    print(product)
-                    input()
+                    chain += f"---- {key} ----\n"
+                    chain += str(product)
+                    chain += "\n"
+                    #input()
                 else:
                     pass
+        return chain
     
     def shows_stats(self):
         '''
@@ -209,21 +212,22 @@ class Warehouse:
 
         Shows you the total warehouse value, the total warehouse stock, the cheapest product and the most expensive product
         '''
+        chain = ""
         total = 0
         for key in self.products.keys():
             for product in self.products[key]:
                 total += product.getPrice()
-        print("---- Total warehouse value ----")
-        print(f"{total}€")
-        input()
+        chain += "---- Total warehouse value ----\n"
+        chain += f"{total}€\n"
+        #input()
 
         stock = 0
         for key in self.products.keys():
             for product in self.products[key]:
                 stock += product.getStock()
-        print("---- Total warehouse stock ----")
-        print(f"{stock} products")
-        input()
+        chain += "---- Total warehouse stock ----\n"
+        chain += f"{stock} products\n"
+        #input()
 
         box = []
         price = []
@@ -232,13 +236,14 @@ class Warehouse:
             for product in self.products[key]:
                 box.append(product.getName())
                 price.append(product.getPrice())
-        print("---- The cheapest product ----")
-        print(f"{box[price.index(min(price))]}: {min(price)}€")
-        input()
+        chain += "---- The cheapest product ----\n"
+        chain += f"{box[price.index(min(price))]}: {min(price)}€\n"
+        #input()
 
-        print("---- The expensive product ----")
-        print(f"{box[price.index(max(price))]}: {max(price)}€")
-        input()
+        chain += "---- The expensive product ----\n"
+        chain += f"{box[price.index(max(price))]}: {max(price)}€"
+        #input()
+        return chain
 
 
             

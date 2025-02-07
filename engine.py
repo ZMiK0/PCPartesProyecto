@@ -71,14 +71,16 @@ class Engine:
                     print("Remove product")
                     self.warehouse.show_category()
                     category = input("Please, state the product category: ")
-                    self.warehouse.remove_product(category)
+                    print(self.warehouse.remove_product(category))
                 case "6":
                     print("Filter products by price")
                     price = float(input("State the maximum price that you can buy: "))
-                    self.warehouse.filter_prices(price)
+                    print(self.warehouse.filter_prices(price))
+                    input()
                 case "7":
                     print("Shows stats")
-                    self.warehouse.shows_stats()
+                    print(self.warehouse.shows_stats())
+                    input()
                 case _:
                     print("Bye")
                     ok = True

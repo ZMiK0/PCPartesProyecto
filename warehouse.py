@@ -81,8 +81,8 @@ class Warehouse:
             print("")
             for j in range(len(self.products[i])):
                 chain += (f"{j}: {self.products[i][j]}\n")
+                print(f"{j}: {self.products[i][j]}\n")
         print("─────────────────────────────────────────────────────────────────────────────────")
-        print(chain)
         return chain
     
    
@@ -102,7 +102,6 @@ class Warehouse:
             for product in self.products[category]:
                 if(name == product.getName()):
                     chain += f"The product has been located: {product}"
-                    input()
                     break
         except:
             print("Wrong")
@@ -216,7 +215,6 @@ class Warehouse:
                     chain += f"---- {key} ----\n"
                     chain += str(product)
                     chain += "\n"
-                    #input()
                 else:
                     pass
         return chain
@@ -234,7 +232,6 @@ class Warehouse:
                 total += product.getPrice()
         chain += "---- Total warehouse value ----\n"
         chain += f"{total}€\n"
-        #input()
 
         stock = 0
         for key in self.products.keys():
@@ -242,7 +239,6 @@ class Warehouse:
                 stock += product.getStock()
         chain += "---- Total warehouse stock ----\n"
         chain += f"{stock} products\n"
-        #input()
 
         box = []
         price = []
@@ -253,11 +249,9 @@ class Warehouse:
                 price.append(product.getPrice())
         chain += "---- The cheapest product ----\n"
         chain += f"{box[price.index(min(price))]}: {min(price)}€\n"
-        #input()
 
         chain += "---- The expensive product ----\n"
         chain += f"{box[price.index(max(price))]}: {max(price)}€"
-        #input()
         return chain
 
 

@@ -481,9 +481,112 @@ def update_product():
 
    update.mainloop()
 
+def method_remove(category, name, result):
+   result.config(text = warehouse.remove_product(category, name))
 
 def remove_product():
-   print("Here you can delete a product")
+   removew = tk.Toplevel()
+   home.withdraw()
+   removew.title("Remove a product")
+
+   removew.config(bg = "#C3C3C3")
+   removew.geometry("600x400")
+   title_font = font.Font(family = "Oxanium", size = 12, weight = "bold")
+   normal_font = font.Font(family = "Exo 2", size = 10, weight= "bold" )
+
+   title = tk.Label(
+      removew,
+      text = "Remove a product",
+      font = title_font,
+      bg = "#C3C3C3",
+      fg = "#102323",
+      justify = "center"
+   )
+   title.grid(row = 0, column = 0, pady = 20, sticky = "nsew")
+
+   category_name = tk.Label(
+      removew,
+      text = "State the category",
+      font = normal_font,
+      bg = "#C3C3C3",
+      fg = "#102323",
+      justify = "center"
+   )
+   category_name.grid(row = 1, column = 0, pady = 10)
+
+   category = tk.Entry(removew)
+   category.config(
+      bg = "#C3C3C3",
+      fg = "#102323",
+      font = normal_font
+   )
+   category.grid(row = 1, column = 1, pady = 10, padx = 10)
+   category.insert(0, "Enter your text...")
+   category.bind("<FocusIn>", on_focus_in)
+   category.bind("<FocusOut>", on_focus_out)
+
+   name_text = tk.Label(
+      removew,
+      text = "State the name",
+      font = normal_font,
+      bg = "#C3C3C3",
+      fg = "#102323",
+      justify = "center"
+   )
+   name_text.grid(row = 2, column = 0, pady = 10)
+
+   name = tk.Entry(removew)
+   name.config(
+      bg = "#C3C3C3",
+      fg = "#102323",
+      font = normal_font
+   )
+   name.grid(row = 2, column = 1, pady = 10, padx = 10)
+   name.insert(0, "Enter your text...")
+   name.bind("<FocusIn>", on_focus_in)
+   name.bind("<FocusOut>", on_focus_out)
+
+   result = tk.Label(
+      removew,
+      text = "",
+      font = normal_font,
+      bg = "#C3C3C3",
+      fg = "#102323",
+      justify = "center"
+   )
+   result.grid(row = 3, column = 0, pady = 10)
+
+   remove_button = tk.Button(
+      removew,
+      text = "Remove product",
+      width = 20,
+      height = 1,
+      fg = "#102323",
+      bg = "#FCFCF7",
+      relief = "flat",
+      font = normal_font,
+      command = lambda: method_remove(category.get(), name.get(), result)
+   )
+   remove_button.grid(row = 4, column = 0, pady = 10, padx = 10)
+   remove_button.bind("<Enter>", on_enter)
+   remove_button.bind("<Leave>", on_leave)
+
+   close_button = tk.Button(
+      removew,
+      text = "Exit",
+      width = 20,
+      height = 1,
+      fg = "#102323",
+      bg = "#FCFCF7",
+      relief = "flat", #Border style
+      font = normal_font,
+      command=lambda: (home.deiconify(), removew.destroy())
+   )
+   close_button.grid(row = 4, column = 1, pady = 10, padx = 10)
+   close_button.bind("<Enter>", on_enter)
+   close_button.bind("<Leave>", on_leave)
+
+   removew.mainloop()
 
 def method_filter(price, result):
    result.config(text = warehouse.filter_prices(float(price)))

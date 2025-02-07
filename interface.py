@@ -331,8 +331,9 @@ def search_product():
    close_button.bind("<Leave>", on_leave)
    search.mainloop()
 
-def method_update(category, type, number, name, result):
-   result.config(text = warehouse.update_product(category, type, name, number))
+def method_update(category, name, radio_var, number, result):
+   type = "price" if radio_var == "Price" else "stock"
+   result.config(text = warehouse.update_product(category, name, type, number))
 
 
 def update_product():
@@ -417,11 +418,6 @@ def update_product():
    radio1.grid(row = 1, column = 3, pady = 10, padx = 10)
    radio2.grid(row = 2, column = 3, pady = 10, padx = 10)
 
-   if(radio_var.get() == "Price"):
-      type = "price"
-   else:
-      type = "stock"
-
    number_text = tk.Label(
       update,
       text = "State the quantity",
@@ -462,7 +458,7 @@ def update_product():
       bg = "#FCFCF7",
       relief = "flat",
       font = normal_font,
-      command = lambda: method_update(category.get(), type, name.get(), number.get(), result)
+      command = lambda: method_update(category.get(), name.get(), radio_var.get(), number.get(), result)
    )
    update_button.grid(row = 3, column = 2, pady = 10, padx = 10)
    update_button.bind("<Enter>", on_enter)

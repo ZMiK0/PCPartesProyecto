@@ -116,7 +116,7 @@ class Warehouse:
         return chain
     
     
-    def update_product(self, category:str):
+    def update_product(self, category:str, name="", option="", number=0):
         '''
         Update_product method
 
@@ -127,32 +127,49 @@ class Warehouse:
         '''
         chain = ""
         if category in self.products:
-            print("Category found")
+            if name == "":
+                print("Category found")
+                print("─────────────────────────────────────────────────────────────────────────────────")
+                for j in range(len(self.products[category])):
+                    print(f"{j}: {self.products[category][j]}")
+                print("─────────────────────────────────────────────────────────────────────────────────")
+                index = int(input("State the product you want to update (by index number): "))
+                product = self.products[category][index]
+                print("Do you want to update the stock (1) or the price (2)")
+                option = input("SELECT: ")
+                match option:
+                    case "1":
+                        stock = int(input("What's the new stock?: "))
+                        product.setStock(stock)
+                        print(f"The stock has been updated. Stock: {product.getStock()}")
+                        input()
+                        return ""
+                    case "2":
+                        price = float(input("What's the new price?: "))
+                        product.setPrice(price)
+                        print(f"The price has been updated. Price: {product.getPrice()}€")
+                        input()
+                        return ""
+                    case _:
+                        print("This option isn't correct, please try again")
+                        return ""
+            else:
+                for i in self.products[category]:
+                    if i.getName() == name:
+                        product = self.products[category][self.products[category].index(i)]
+                
+                match option:
+                    case "stock":
+                        product.setStock(number)
+                        print("Stock updated")
+                        return ""
+                    case "price":
+                        product.setPrice(number)
+                        print("Price updated")
+                        return ""
+
+
             
-            print("─────────────────────────────────────────────────────────────────────────────────")
-            for j in range(len(self.products[category])):
-                print(f"{j}: {self.products[category][j]}")
-            print("─────────────────────────────────────────────────────────────────────────────────")
-            index = int(input("State the product you want to update (by index number): "))
-            product = self.products[category][index]
-            print("Do you want to update the stock (1) or the price (2)")
-            option = input("SELECT: ")
-            match option:
-                case "1":
-                    stock = int(input("What's the new stock?: "))
-                    product.setStock(stock)
-                    print(f"The stock has been updated. Stock: {product.getStock()}")
-                    input()
-                    return ""
-                case "2":
-                    price = float(input("What's the new price?: "))
-                    product.setPrice(price)
-                    print(f"The price has been updated. Price: {product.getPrice()}€")
-                    input()
-                    return ""
-                case _:
-                    print("This option isn't correct, please try again")
-                    return ""
         else:
             print("Category not found")
             input()

@@ -6,26 +6,58 @@ home = tk.Tk()
 home.title("Welcome to PCPartes!")
 warehouse = Warehouse()
 
-# Hover methods
 def on_enter(event):
+   '''
+   on_enter Method
+
+   Changes the color of the button when the cursor passes over the button (New color)
+
+   Parameters:
+   - event (str): its the cursor event (<Enter>)
+   '''
    event.widget.config(bg = "#A9C61C")
 
 def on_leave(event):
+   '''
+   on_leave Method
+
+   Changes the color of the button when the cursor doesn't pass over the button (Original color)
+
+   Parameters:
+   - event (str): its the cursor event (<Leave>)
+   '''
    event.widget.config(bg = "#FCFCF7")
 
-# Placeholder methods
 def on_focus_in(event):
+    '''
+    on_focus_in Method
+
+    Remove the text of the Entry when the user click on it
+
+    Parameters:
+    - event (str): its the click event (<FocusIn>)
+    '''
     if event.widget.get() == "Enter your text...":
         event.widget.delete(0, tk.END)
 
 def on_focus_out(event):
+    '''
+    on_focus_out Method
+
+    Put the text of the Entry when the user doesn't click on it
+
+    Parameters:
+    - event (str): its the click event (<FocusOut>)
+    '''
     if event.widget.get() == "":
         event.widget.insert(0, "Enter your text...")
    
 
 def show_inventory():
    '''
-   Aquí falta agregar la categoria. Una buena idea sustituir el numerito por la categoria
+   show_inventory Method
+
+   This method create a new window to show all the products of own shop
    '''
    inventory = tk.Toplevel()
    home.withdraw() #Hide the window
@@ -74,6 +106,11 @@ def show_inventory():
    inventory.mainloop()
 
 def add_product():
+   '''
+   add_product Method
+
+   This method create a new window to add a product to own inventory
+   '''
    product = tk.Toplevel()
    home.withdraw()
    product.title("Add product in PCPartes warehouse")
@@ -227,9 +264,24 @@ def add_product():
    product.mainloop()
 
 def show_result(category, name, result):
+   '''
+   show_result Method
+
+   This sub-method help the search_product method
+
+   Parameters:
+   - category (str): its the product category
+   - name (str): its the product name
+   - resul (Label): its the place that shows the return of the method
+   '''
    result.config(text = warehouse.search_product(category, name))
 
 def search_product():
+   '''
+   search_product Method
+
+   This method create a window to search a product in own inventory
+   '''
    search = tk.Toplevel()
    home.withdraw()
    search.title("Seach a product in PCPartes warehouse")
@@ -332,11 +384,28 @@ def search_product():
    search.mainloop()
 
 def method_update(category, name, radio_var, number, result):
+   '''
+   method_update Method
+
+   This sub-method help the update_product method
+
+   Parameters:
+   - category (str): its the product category
+   - name (str): its the product name
+   - radio_var (StringVar): its the stock or the price
+   - number (str): its the new value of the stock or the price
+   - result (Label): its the place that shows the return of the method
+   '''
    type = "price" if radio_var == "Price" else "stock"
    result.config(text = warehouse.update_product(category, name, type, number))
 
 
 def update_product():
+   '''
+   update_product Method
+
+   This create a window to update a product in own inventory
+   '''
    update = tk.Toplevel()
    home.withdraw()
    update.title("Update a product in PCPartes warehouse")
@@ -482,9 +551,24 @@ def update_product():
    update.mainloop()
 
 def method_remove(category, name, result):
+   '''
+   method_remove Method
+
+   This sub-method help the remove_product method
+
+   Parameters:
+   - category (str): its the product category
+   - name (str): its the product name
+   - result (Label): its the place that shows the return of the method
+   '''
    result.config(text = warehouse.remove_product(category, name))
 
 def remove_product():
+   '''
+   remove_product Method
+
+   This method create a window to remove a product in own inventory
+   '''
    removew = tk.Toplevel()
    home.withdraw()
    removew.title("Remove a product")
@@ -589,9 +673,22 @@ def remove_product():
    removew.mainloop()
 
 def method_filter(price, result):
+   '''
+   method_filter Method
+
+   This sub-method help the filter_product method
+
+   Parameters:
+   - price (float):
+   '''
    result.config(text = warehouse.filter_prices(float(price)))
 
 def filter_product():
+   '''
+   filter_product Method
+
+   This method create a window to filter the products by price
+   '''
    filterw = tk.Toplevel()
    home.withdraw()
    filterw.title("Filter a product by price")
@@ -675,6 +772,11 @@ def filter_product():
    filterw.mainloop()
 
 def show_stats():
+   '''
+   show_stats Method
+
+   This method create a window to show all the stats of own shop (Total value, Total quantity, Cheapiest product, The most expensive product)
+   '''
    stats = tk.Toplevel()
    home.withdraw() #Hide the window
    stats.title("PCPartes stats")

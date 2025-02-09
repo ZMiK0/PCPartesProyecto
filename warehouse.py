@@ -1,4 +1,18 @@
 from products import Product
+from time import sleep
+import os
+
+def clear():
+    '''
+    Clear method 
+
+    This method cleans all your console
+    '''
+    if os.name == 'nt':
+        os.system('cls')
+    else:
+        os.system('clear')
+
 
 
 class Warehouse:
@@ -78,12 +92,56 @@ class Warehouse:
         for i in self.products:
             print("─────────────────────────────────────────────────────────────────────────────────")
             print(f"{i}: ")
-            print("")
             for j in range(len(self.products[i])):
                 chain += (f"{j}: {self.products[i][j]}\n")
-                print(f"{j}: {self.products[i][j]}\n")
+                print(f"{j}: {self.products[i][j]}")
         print("─────────────────────────────────────────────────────────────────────────────────")
         return chain
+    
+    def show_category_product(self, category:str):
+        '''
+        show_category_product Method
+
+        This method shows the products of a specific category given by the user
+        '''
+        print("─────────────────────────────────────────────────────────────────────────────────")
+        for i in range(len(self.products[category])):
+            print(f"{i}: {self.products[category][i]}")
+        print("─────────────────────────────────────────────────────────────────────────────────")
+
+    def buy_product(self, category:str, product_index:int, quantity:int):
+        '''
+        buy_product Method
+
+        This method reduces the stock of a product by simulating a purchase
+        '''
+        if(self.products[category][product_index].getStock() >= quantity):
+            clear()
+            for i in range(5):
+                for j in range(4):
+                    print(f"Processing purchase of {quantity} x {self.products[category][product_index].getName()}")
+                    print(f"{"*"*j}")
+                    sleep(0.5)
+                    clear()
+            clear()
+            self.products[category][product_index].sellStock(quantity)
+            print("╔════════════════════════════════════╗")
+            print("║          Purchase Receipt          ║")
+            print("╠════════════════════════════════════╣")
+            print("║                                    ║")
+            print("║                                    ║")
+            for i in range(quantity):
+                print(f"║  {i}. {self.products[category][product_index].getName()}")
+            print("║                                    ║")
+            print("║                                    ║")
+            print(f"║  TOTAL: {round((self.products[category][product_index].getPrice() * quantity),2)}€")
+            print("╚════════════════════════════════════╝")
+            input()
+            
+                
+                
+        else:
+            print("SORRY, WE DO NOT HAVE ENOUGH STOCK")
     
    
     def search_product(self, category:str, name:str):

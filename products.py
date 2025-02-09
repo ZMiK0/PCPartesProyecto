@@ -47,7 +47,22 @@ class Product:
         This method return the product stock
         '''
         return self.stock
-    
+
+    def addStock(self, n:int):
+        '''
+        addStock Method
+
+        This method adds the stock a given number
+        '''
+        self.stock += n
+
+    def sellStock(self, n:int):
+        '''
+        sellStock Method
+
+        This method removes the stock by a given number
+        '''
+        self.stock -= n
     
     def getPrice(self):
         '''

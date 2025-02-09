@@ -44,7 +44,7 @@ class Engine:
         while not ok:
             clear()
             print("────────────────────────────────────")
-            print("1. Show inventory \n2. Add product \n3. Search product \n4. Update product \n5. Remove product \n6. Filter products by price \n7. Show stats \n0. Exit ")
+            print("1. Show inventory \n2. Add product \n3. Search product \n4. Update product \n5. Remove product \n6. Filter products by price \n7. Show stats\n8. NEW: Sale Simulation \n0. Exit ")
             print("────────────────────────────────────")
             option = input("SELECT: ")
             match option:
@@ -81,6 +81,10 @@ class Engine:
                     print("Shows stats")
                     print(self.warehouse.shows_stats())
                     input()
+                case "8":
+                    print("Sale Simulation")
+                    self.sale_simulation()
+                    input()
                 case _:
                     print("Bye")
                     ok = True
@@ -114,7 +118,6 @@ class Engine:
                     category = None
                     ok2 = True
                     break
-            #Queda comprobar si hay elementos repes
             name = input("Name: ")
             brand = input("Brand: ")
             ok3 = False
@@ -130,3 +133,24 @@ class Engine:
             if category != None:
                 self.warehouse.add(category, name,brand,stock,price)
                 input()
+
+    def sale_simulation(self):
+        '''
+        sale_simulation Method
+
+        This method simulates a real sale
+        '''
+        try:
+            clear()
+            self.warehouse.show_category()
+            category = input("SELECT CATEGORY (by name): ")
+            self.warehouse.show_category_product(category)
+            product_index = int(input("SELECT PRODUCT (by index): "))
+            quantity = int(input("STATE THE QUANTITY: "))
+            self.warehouse.buy_product(category, product_index, quantity)
+        except:
+            print("--ERROR: WRONG INPUT--")
+            input()
+
+
+
